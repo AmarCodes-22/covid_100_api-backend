@@ -55,7 +55,7 @@ resource_fields = {
 
 class Resource_cv100(Resource):
 
-    @marshal_with(resource_fields)
+    #@marshal_with(resource_fields)
     def put(self, resource_id):
         args = resource_cv100_put_args.parse_args()
         result = ResourcesModel.query.filter_by(id=resource_id).first()
@@ -73,7 +73,7 @@ class Resource_cv100(Resource):
         db.session.add(resource)
         db.session.commit()
 
-        return resource, 201
+        return 'Put successful', 201
 
     @marshal_with(resource_fields)
     def get(self, resource_id):
@@ -83,7 +83,7 @@ class Resource_cv100(Resource):
 
         return result
 
-    @marshal_with(resource_fields)
+    #@marshal_with(resource_fields)
     def patch(self, resource_id):
         args = resource_cv100_update_args.parse_args()
         result = ResourcesModel.query.filter_by(id=resource_id).first()
@@ -112,9 +112,9 @@ class Resource_cv100(Resource):
             result.msg = args['msg']
 
         db.session.commit()
-        return result
+        return 'Update successful'
 
-    @marshal_with(resource_fields)
+    #@marshal_with(resource_fields)
     def delete(self, resource_id):
         result = ResourcesModel.query.filter_by(id=resource_id).first()
         temp = result
@@ -123,11 +123,11 @@ class Resource_cv100(Resource):
 
         db.session.delete(result)
         db.session.commit()
-        return '', 204
+        return 'Delete successful', 204
 
 class  AllResources(Resource):
     @marshal_with(resource_fields)
-    def get(self):
+    def get(self) -> list:
         result = ResourcesModel.query.all()
         return result
 
