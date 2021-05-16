@@ -1,0 +1,71 @@
+API DOCUMENTATION
+
+Base URL: 
+https://covid-100-develop-branch-test.herokuapp.com/
+
+RESOURCES:
+	Members:
+		Get method:
+			URL: base + 'member/member_id:integer'
+
+			returns: Dict
+				{'name':value:str, 'role':value:str}
+
+	AllResources:
+		get method:
+			URL: base + 'all_resource'
+
+			returns: List(Dict)
+				[{},{},{},...]
+
+	Resource_cv100:
+		URL: base + resource/resource_id:integer
+		put method: Adds a new resource record to the database
+			
+			returns: 'Put successful'
+
+			body: 'name',          type=str,                          help='Enter the contact\'s name.'
+						'contact',       type=str,                          help='Enter the contact information.', required=True
+						'date',          type=inputs.datetime_from_iso8601, help='Enter the date.',                required=True
+						'resource_type', type=int,                          help='Enter the resource_type.',       required=True
+						'upvotes',       type=int,                          help='Enter the number of upvotes.'
+						'downvotes',     type=int,                          help='Enter the number of downvotes.'
+						'msg',           type=str,                          help='Enter a message.'
+
+			body_format:
+						{'name':'Amar', 
+						'contact':'987', #Required
+						'date':'2021-03-05T23:30:00+02:00', #Required
+						'resource_type':3, #Required
+						'upvotes':1,
+						'downvotes':2,
+						'msg':'Only two left in stock'}
+
+		get method: Gets all the data about a record based on resource_id
+			returns: Dictionary
+
+			return format: 
+						{
+						'id':0
+						'name':'Amar',
+						'contact':'987',
+						'date':'2021-03-05T23:30:00+02:00',
+						'resource_type':3,
+						'upvotes':1,
+						'downvotes':2,
+						'msg':'Only two left in stock'
+						}
+
+		delete method: Deletes a record based on resource_id
+			returns: 'Delete successfully'
+
+		patch method: Updates values in a record based on resource_id
+			returns: 'Updated successfully'
+
+			body: Dictionary
+
+			body_format:
+						{'key':'value'}
+
+						All keys do not have to be mentioned.
+						Only provide the keys that you want to change the information for.

@@ -48,7 +48,7 @@ resource_fields = {
     'contact':fields.String,
     'date':fields.DateTime,
     'msg':fields.String,
-    'resource_type':fields.String,
+    'resource_type':fields.Integer,
     'upvotes':fields.Integer,
     'downvotes':fields.Integer
 }
